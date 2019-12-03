@@ -47,6 +47,8 @@ int ft_invaliderange(int a)
 		printf("Error\ninvalide range in R,G,B colors in Light");
 	if (a == 3)
 		printf("Error\ninvalide range in R,G,B colors in Sphere");
+	if (a == 4)
+		printf("Error\ninvalide range in vectors of camera");
 	return (-1);
 }
 
@@ -211,7 +213,7 @@ int checkvectorrange(char *line)
 		if (ft_atoi(tab[1]) < 0)
 			return (ft_invalideforme());
 		if (ft_atoi(tab[0]) == 1 && ft_atoi(tab[1]) > 0)
-			return(ft_invalidereso());
+			return(ft_invaliderange(4));
 	}
 	else
 		return(ft_invalideforme());
@@ -313,10 +315,10 @@ int		ft_minirt(int fd)
 	int i;
 	int c;
 	int b;
-
+	int e;
 	c = 0;
 	b = 0;
-	while(get_next_line(fd, &line) >= 0)
+	while((e = get_next_line(fd, &line)) >= 0)
 	{
 		if (line[0] == 'R' && c == 0)
 		{
@@ -347,6 +349,8 @@ int		ft_minirt(int fd)
 		}
 		else
 			return(ft_wrongname());
+		if (e == 0)
+			break;
 	}
 	return (0);
 }
